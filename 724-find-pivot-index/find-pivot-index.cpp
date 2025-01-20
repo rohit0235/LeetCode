@@ -9,7 +9,7 @@ public:
             for (int i=0;i<n;i++){
                  
                   leftsum+=nums[i];
-                  cout<<leftsum<<" "<<total-leftsum<<" "<<endl;
+        
                   if (leftsum-nums[i]==total-leftsum){
                     return i;
                   }
