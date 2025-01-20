@@ -18,7 +18,7 @@ public:
                  sum+=nums[i+k-1];
 
                  maxi=max(maxi,sum/k);
-                 cout<<maxi<<" "<<endl;
+           
            }
 
            return maxi;
