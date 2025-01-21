@@ -18,7 +18,7 @@ public:
             }
                 
             if (j==n) break;
-            cout<<i<<" "<<j<<endl;
+ 
  
              
                if (i<j && nums[i]==0 && nums[j]!=0 ) swap(nums[i],nums[j]);
