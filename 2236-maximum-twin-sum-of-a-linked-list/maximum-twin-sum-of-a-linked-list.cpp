@@ -12,22 +12,58 @@ class Solution {
 public:
     int pairSum(ListNode* head) {
             
-              vector<int>data;
-              while (head){
-                    data.push_back(head->val);
-                    head=head->next;
-              }
+          // 
+          ListNode *slow=head;
+          ListNode *fast=head;
+          while (fast && fast->next) {
+             slow=slow->next;
+             fast=fast->next->next;
+          }
 
-              int maxi=INT_MIN;
-              int n =data.size();
-              for (int i=0;i<n;i++){
-                    
-                    int sum=data[i]+data[n-i-1];
-                    maxi=max(maxi,sum);
-                    
-              }
+          ListNode *mid=slow;
 
-              return maxi;
+          ListNode *prev=NULL;
+          ListNode *next;
+
+          while (mid){
+              next=mid->next;
+              mid->next=prev;
+              prev=mid;
+              mid=next;
+          }
+        
+          int maxi=0;
+          ListNode *temp=head;
+          while (prev){
+               maxi=max(maxi,prev->val+temp->val);
+             prev=prev->next;
+             temp=temp->next;
+          }
+
+   return maxi;
+
+
+
+
+
+
+
+            //   vector<int>data;
+            //   while (head){
+            //         data.push_back(head->val);
+            //         head=head->next;
+            //   }
+
+            //   int maxi=INT_MIN;
+            //   int n =data.size();
+            //   for (int i=0;i<n;i++){
+                    
+            //         int sum=data[i]+data[n-i-1];
+            //         maxi=max(maxi,sum);
+                    
+            //   }
+
+            //   return maxi;
 
     }
 };
