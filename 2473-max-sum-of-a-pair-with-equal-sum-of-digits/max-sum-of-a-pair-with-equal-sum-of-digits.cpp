@@ -25,6 +25,8 @@ public:
                   int sums=digitsum(nums[i]);
                 if (mp.find(sums)!=mp.end()){
                          maxi=max(maxi,nums[i]+nums[mp[sums]]);
+                          mp[sums]=i;
+                          continue;
                     
                 }
                   mp[sums]=i;
