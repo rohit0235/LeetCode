@@ -23,7 +23,7 @@ public:
 
     }
     FindElements(TreeNode* root) {  
-        st.clear();
+        // st.clear();
         dfs(root,0);
     }
     
