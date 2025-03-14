@@ -8,7 +8,7 @@ public:
             int maxi=*max_element(candies.begin(),candies.end());
             // cout<<maxi;
               
-            sort(candies.begin(),candies.end());
+            // sort(candies.begin(),candies.end());
             int low=1;
             int high=maxi;
             int ans=0;
@@ -16,9 +16,7 @@ public:
                 int mid=low+(high-low)/2;
                      long long count=0;
                     for(int j=n-1;j>=0;j--){
-                        if (candies[j]<mid) break;
                            count+=candies[j]/mid;
-                        //    if (count>=k) return i;
                     }
                     
                     if(count<k){
