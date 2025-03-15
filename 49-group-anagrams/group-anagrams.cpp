@@ -15,7 +15,7 @@ public:
                     //      cout<<i.first<<" "<<i.second<<" ";
 
                     //  }
-                     cout<<endl;
+                    //  cout<<endl;
                      if (mp.find(strs[i])!=mp.end()){
                         int index=mp[strs[i]];
                         //   cout<<index<<" "<<endl;
