@@ -20,7 +20,7 @@ public:
         while (k--) {
             if (!pq.empty() && (pq2.empty() || pq.top().first <= pq2.top().first)) {
                 cost += pq.top().first;
-                int idx = pq.top().second;
+                // int idx = pq.top().second;
                 pq.pop();
                 if (i <= j) {
                     pq.push({costs[i], i});
@@ -28,7 +28,7 @@ public:
                 }
             } else {
                 cost += pq2.top().first;
-                int idx = pq2.top().second;
+                // int idx = pq2.top().second;
                 pq2.pop();
                 if (i <= j) {
                     pq2.push({costs[j], j});
