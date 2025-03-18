@@ -1,18 +1,21 @@
 class Solution {
 public:
     int n;
-    int result(vector<int>&nums,int i,vector<int>&dp){
-             
-             if (i>=n) return 0;
-            if (dp[i]!=-1) return dp[i];
-             int take=nums[i]+result(nums,i+2,dp);
-             int nottake=result(nums,i+1,dp);
-            //   cout<<take<<" "<<nottake<<" "<<endl;
-             return dp[i]=max(take,nottake);
-    }
+    
+    int solve(vector<int>&nums,int index,vector<int>&dp){
+
+      if (index>=n) return 0;
+      if (dp[index]!=-1) return dp[index];
+     int  chori=nums[index]+solve(nums,index+2,dp);
+     int  chorinahi=solve(nums,index+1,dp);
+     return dp[index]=max(chori,chorinahi);
+
+    } 
+
     int rob(vector<int>& nums) {
         n=nums.size();
-         vector<int>dp(n,-1);
-        return result(nums,0,dp);
+        vector<int>dp(n+1,-1);
+
+        return solve(nums,0,dp);
     }
 };
