@@ -5,11 +5,11 @@ public:
              int n=nums.size();
               int flipcount=0;
               int k=3;
-             vector<bool>isf(n,false);
+            //  vector<bool>isf(n,false);
              int ans=0;
              for(int i=0;i<n;i++){
                   
-                  if (i>=k && isf[i-k]){
+                  if (i>=k && nums[i-k]==5){
                       flipcount--;
                   }
 
@@ -19,7 +19,7 @@ public:
 
                          flipcount++;
                          ans++;
-                         isf[i]=true;
+                         nums[i]=5;
                          
                   }
                      
