@@ -8,10 +8,10 @@ public:
            
            if (i==m-1 && j==n-1) return 1;
            if (dp[i][j]!=-1) return dp[i][j]; 
-           int pos1=solve(i+1,j,m,n,dp);
-           int pos2=solve(i,j+1,m,n,dp);
+           dp[i+1][j]=solve(i+1,j,m,n,dp);
+           dp[i][j+1]=solve(i,j+1,m,n,dp);
            
-            return dp[i][j]=pos1+pos2;
+            return dp[i][j]=dp[i+1][j]+dp[i][j+1];
     }
     
     int uniquePaths(int m, int n) {
