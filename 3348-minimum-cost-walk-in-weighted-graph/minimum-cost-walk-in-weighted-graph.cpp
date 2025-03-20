@@ -46,7 +46,7 @@ public:
                 int destination=q[1];
                 
                 if (source==destination) result.push_back(0);
-  else if (parent[find(source)]==parent[find(destination)]) result.push_back(cost[find(parent[source])]);
+  else if (find(source)==find(destination)) result.push_back(cost[find(source)]);
                 else result.push_back(-1);
           }
 
