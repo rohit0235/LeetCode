@@ -14,7 +14,10 @@ public:
     // }
     
     vector<int> sortArray(vector<int>& vec) {
-             sort(begin(vec),end(vec),comp());
+            //  sort(begin(vec),end(vec),comp());
+             sort(begin(vec),end(vec),[](int a , int b){
+                 return a<b;
+             });
              return vec;
     }
 };
