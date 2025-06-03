@@ -23,6 +23,6 @@ public:
 
          if (checkleft!=NULL) return checkleft;
         
-       return checkright;
+           return checkright;
     }
 };
