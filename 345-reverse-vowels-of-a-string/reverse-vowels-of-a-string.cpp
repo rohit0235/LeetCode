@@ -13,7 +13,7 @@ public:
                    while (i<j && s[j]!='a' &&s[j]!='A' && s[j]!='e' && s[j]!='E' &&   s[j]!='I' && s[j]!='i' && s[j]!='o' && s[j]!='O' && s[j]!='u' &&  s[j]!='U'   ){
                          j--;
                    }
-                   cout<<i<<" "<<j<<" ";
+                //    cout<<i<<" "<<j<<" ";
                   if (i<j){
                        swap(s[i],s[j]);
                        i++;
