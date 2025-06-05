@@ -1,7 +1,7 @@
 class Solution {
 public:
      
-     bool isp(string s){
+     bool isp(string &s){
             
             int i=0;
             int j=s.size()-1;
