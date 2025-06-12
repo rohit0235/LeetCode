@@ -31,7 +31,7 @@ public:
             int u = vec[0];
             int v = vec[1];
 
-            adj[v].push_back(u);
+            adj[u].push_back(v);
         }
 
         vector<int> visited(V, 0);
