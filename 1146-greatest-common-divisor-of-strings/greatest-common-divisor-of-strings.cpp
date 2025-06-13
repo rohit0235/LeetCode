@@ -33,10 +33,9 @@ public:
 
         if (str1 == str2)
             return str1;
-        if (str2.size()==0)
+        if (str2.size()==0 || str1.size()==0)
             return str1;
-        if (str1.size()==0)
-            return str1;        
+
 
         if(str1.compare(0, str2.length(), str2) == 0){
             return gcdOfStrings(str1.substr(str2.length()), str2);
