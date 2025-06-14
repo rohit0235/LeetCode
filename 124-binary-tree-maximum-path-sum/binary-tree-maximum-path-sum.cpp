@@ -10,35 +10,34 @@
  * };
  */
 class Solution {
-public: 
-   
+public:
+      
      int maxsum;
-     
      int solve(TreeNode *root){
-         
-         if (root==NULL) return 0;
-         
-         int l=solve(root->left);
-         int r=solve(root->right);
-          
-         int nat= l+r+root->val;
-         int sirfek= max(l,r)+root->val;
-         int nma=root->val;
+            
+            if (root==NULL) return 0;
+
+            int  l = solve(root->left);
+            int  r = solve(root->right);
+            
+            int nichewalalenahai = root->val+l+r;
+            int sirfekhilo = root->val + max(l,r);
+            int sirfmai = root->val;
+
+           maxsum =max({maxsum,nichewalalenahai,sirfekhilo,sirfmai});
 
 
-         maxsum=max({maxsum,nat, sirfek , nma});
-
-         return max(sirfek,nma);
+           return max(sirfekhilo,sirfmai);
 
      }
 
 
     int maxPathSum(TreeNode* root) {
-          maxsum=INT_MIN;
+                  maxsum=INT_MIN;
 
-          solve(root);
+                   solve(root);
 
-        return maxsum;
-
+                   return maxsum;
+                   
     }
 };
