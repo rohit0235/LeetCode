@@ -27,7 +27,7 @@ public:
 
              }
      
-             for(int i:nextgreater) cout<<i<<endl;
+            //  for(int i:nextgreater) cout<<i<<endl;
              unordered_map<int,int>mp;
 
               for(int i=0;i<n;i++){
