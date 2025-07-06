@@ -14,7 +14,7 @@ public:
                           
                            if (matrix[i][j]=='1'){
                               
- dp[i + 1][j + 1] = std::min(std::min(dp[i][j + 1], dp[i + 1][j]), dp[i][j]) + 1;
+ dp[i + 1][j + 1] = 1+std::min(std::min(dp[i][j + 1], dp[i + 1][j]), dp[i][j]);
            
                     maxSize = std::max(maxSize, dp[i + 1][j + 1]);
                               
