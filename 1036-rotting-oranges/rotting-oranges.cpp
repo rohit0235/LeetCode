@@ -24,7 +24,7 @@ public:
                   for (int i=0;i<size;i++){
 
                          pair<int,int>pa=q.front();
-
+                                q.pop();
                          if (pa.second+1<n && grid[pa.first][pa.second+1]==1){
                                     grid[pa.first][pa.second+1]=2;
                                  q.push(make_pair(pa.first,pa.second+1));
@@ -42,7 +42,7 @@ public:
                                  q.push(make_pair(pa.first-1,pa.second));
                          }
                           
-                            q.pop();
+                    
                   }
            }
            return -1;
