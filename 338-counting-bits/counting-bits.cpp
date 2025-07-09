@@ -1,17 +1,24 @@
 class Solution {
 public:
-    vector<int> countBits(int &n) {
-        
-        vector<int>ans;
-        for (int i=0;i<=n;i++){
-           int count = 0;
-    int num = i;
-    while (num > 0) {
-        count += (num & 1); // Add 1 if the least significant bit is 1
-        num >>= 1;          // Right-shift the number by 1 bit
-    }
-    ans.push_back(count);
-        }
-        return ans;
+    vector<int> countBits(int n) {
+            
+            vector<int>ans;
+            ans.push_back(0);
+            // ans.push_back(1);
+             
+           for(int i=1;i<=n;i++){
+             
+                 if (i%2==0){
+                     ans.push_back(ans[i/2]);
+                 }
+                 else{
+                     ans.push_back((ans[i/2])+1);
+                 }          
+
+          }
+
+          return ans;
+   
+ 
     }
 };
