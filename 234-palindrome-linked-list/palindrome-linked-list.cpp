@@ -11,33 +11,41 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        if (head==NULL) return true;
-
-        ListNode *slow=head;
-        ListNode *fast=head;
-
-        while (fast!=NULL &&  fast->next!=NULL) {
-            slow=slow->next;
-            fast=fast->next->next;
-        }
         
-    
+             ListNode *slow =head;
+             ListNode *fast =head;
 
-         ListNode *prev=NULL;
-         ListNode *curr=slow;
-          ListNode *next;
+             while (fast && fast->next){
+                 slow=slow->next;
+                 fast=fast->next->next;
 
-         while (curr!=NULL){
-                
-                next=curr->next;
-                curr->next=prev;
+             }
+            
+               ListNode     *prev =NULL;
+             ListNode *curr = slow;
+
+              ListNode * next ;
+
+              while (curr ){
+                 
+                next = curr->next;
+                curr->next =prev;
                 prev=curr;
                 curr=next;
-         }
-         
-       ListNode *temp3=head;
+                  
+              }
+           
+
+            //   ListNode *temp =head;
+            // while (slow){
+                  
+            //       if (slow->val!=temp->val ) return false;
+            //       slow=slow->next;
+            //       temp=temp->next;
+            // }
+         ListNode *temp3=head;
          while (prev!=NULL){
-                // cout<<temp3->val<<" "<<prev->val;
+            
                 if (temp3->val !=prev->val) {
                      return false;
                 }
@@ -48,25 +56,8 @@ public:
          
          return true;
 
+            
 
 
-        // vector<int>s;
-        // ListNode *temp=head;
-        // while (temp){
-        //      s.push_back(temp->val);
-        //      temp=temp->next;
-        // }
-        // // for(int i:s)cout<<i<<" ";
-        // int i=0;
-        // int j=s.size()-1;
-        // while (i<j){
-              
-        //       if (s[i]!=s[j]) return false; 
-        //       i++;
-        //       j--;
-        // }
-
-        // return true;
-        
     }
 };
