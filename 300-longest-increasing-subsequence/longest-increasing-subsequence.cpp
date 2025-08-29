@@ -1,25 +1,28 @@
 class Solution {
 public:
-     int n;
-     int solve(vector<int>& nums,int i,int j, vector<vector<int>>&dp){
-            
-            if (i>=n || j>=n) return 0;
-            int take=0;
-            if (dp[i+1][j]!=-1) return dp[i+1][j];
-            if (i==-1 || nums[i]<nums[j]){
-                take= 1+solve(nums,j,j+1,dp);
-            }
-            
-          
-            int skip =solve(nums,i,j+1,dp);
-      
 
-            return dp[i+1][j]=max(skip,take);
-     }
-    
+   int solve(vector<int>&nums, int i, int prev,  vector<vector<int>>&dp){
+     
+         if (i>=nums.size()) return 0;
+         if (prev!=-1 && dp[i][prev+1]!=-1) return dp[i][prev+1];
+         int first =0;
+         
+         if (prev==-1 || nums[i]>nums[prev]){
+            first =1+ solve(nums, i+1 , i,dp );
+         }
+
+         int second = solve(nums, i+1 , prev,dp);
+
+         return dp[i][prev+1]=max(first ,second );
+   }
+   
     int lengthOfLIS(vector<int>& nums) {
-            n=nums.size();
-            vector<vector<int>>dp(n+1,vector<int>(n,-1));
-            return solve(nums,-1,0,dp);
+             
+
+              int n = nums.size();
+            //   int maxi = *max_element(nums.begin(),nums.end());
+            //   int mini = *min_element(nums.begin(),nums.end());
+              vector<vector<int>>dp(2501, vector<int>(2501 , -1));
+              return solve(nums, 0,-1,dp);
     }
 };
