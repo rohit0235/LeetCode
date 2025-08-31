@@ -1,62 +1,62 @@
 class Solution {
 public:
-    bool issafe(vector<vector<char>>& board,char dig , int row , int col){
-          
-            for(int i=0;i<9;i++){
-                  if (board[row][i]==dig) return false;
-                  if (board[i][col]==dig) return false;
-            }
+   
+   bool safe(vector<vector<char>>&board ,  int row, int col ,char dg){
 
-            int fr = (row/3)*3;        
-            int fc = (col/3)*3;
+              for(int i=0;i<9;i++){ 
+                          if (board[row][i]==dg) return false;
+                          if (board[i][col]==dg) return false;
+              }   
+       
+               int rowlimit = (row/3)*3;
+               int collimit =( col/3)*3;
 
-            for(int i=fr;i<fr+3;i++){
+
+               for(int i=rowlimit;i<rowlimit+3;i++){
                  
-                  for(int j= fc;j<fc+3;j++){
-                          
-                         if (board[i][j]==dig) return false;
-                  }
-            }        
+                   for(int j=collimit;j<collimit+3;j++){
+                            
+                            if (board[i][j]==dg) return false;
+                   }
+               }
 
-            return true;
-           
-    }
-    bool help(vector<vector<char>>& board, int row , int col){
-                 
-                  if (row==9) return true;
-                  int newrow = row;
-                  int newcol = col+1;
-                  if (newcol==9){
-                     newrow = row+1;
-                     newcol=0;
-                  }
-                  if (board[row][col]!='.'){
-                       return help(board , newrow , newcol);
-                  }
+               return true;
+
  
-                  for(char i='1';i<='9';i++){
+        
+   }
+   bool solve(vector<vector<char>>&board ,  int row, int col ){
+            
+                if (row==9) return true;
 
-                          if (issafe(board, i,row, col)){
-                                      board[row][col]=i;
-                               if (help(board, newrow, newcol)) return true;
-                                board[row][col]='.';
-                          }                           
+                int newrow = row;
+                int newcol = col+1;
 
-                   
-                           
-                  }
-                  return false;
+                if (newcol==9) {
+                      newcol =0;
+                      newrow = row+1;
+                }
 
-              
+                if (board[row][col]!='.') return solve(board, newrow  , newcol);
 
-    }
- 
-  
+                for(int i='1';i<='9';i++){
+                      if (safe(board ,row , col , i)) {
+                         board[row][col] =i;
+
+                         if (solve(board ,newrow , newcol)) return true;
+                         board[row][col] ='.';
+
+                      }
+                }
+
+                return false;
+               
+   }
+    
     void solveSudoku(vector<vector<char>>& board) {
             
-             int row = board.size();
-             int col = board[0].size();
-          
-            help(board , 0,0);
+   
+
+              solve(board ,  0 , 0);
     }
 };
