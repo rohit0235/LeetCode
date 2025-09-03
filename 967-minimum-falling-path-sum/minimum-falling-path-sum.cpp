@@ -12,10 +12,10 @@ public:
             for (int j = 0; j < m; ++j) {
                 int minAbove = matrix[i-1][j];
                 if (j > 0) {
-                    minAbove = std::min(minAbove, matrix[i-1][j-1]);
+                    minAbove =min(minAbove, matrix[i-1][j-1]);
                 }
                 if (j < m - 1) {
-                    minAbove = std::min(minAbove, matrix[i-1][j+1]);
+                    minAbove =min(minAbove, matrix[i-1][j+1]);
                 }
                 matrix[i][j] += minAbove;
             }
@@ -23,7 +23,7 @@ public:
         
         int minSum = INT_MAX;
         for (int j = 0; j < m; ++j) {
-            minSum = std::min(minSum, matrix[n-1][j]);
+            minSum =min(minSum, matrix[n-1][j]);
         }
         
         return minSum;
