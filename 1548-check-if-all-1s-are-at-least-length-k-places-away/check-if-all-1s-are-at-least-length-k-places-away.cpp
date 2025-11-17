@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool kLengthApart(vector<int>& nums, int k) {
+            
+             int n = nums.size();
+             int prev= -1;
+             for(int i=0;i<n;i++){
+                    
+                     if (prev!=-1 && nums[i]==1){
+                        // cout<<i<<" "<<prev<<endl;
+                          if (i-prev-1<k){
+                              return false;
+                          }
+                          prev= i;
+                    }
+                    if (prev==-1 && nums[i]==1){
+                           prev=i;
+                    }
+            
+                   
+             }
+
+             return true;
+           
+    }
+};
