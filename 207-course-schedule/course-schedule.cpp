@@ -1,83 +1,38 @@
 class Solution {
 public:
-    // bool solve(vector<int>& visited, vector<int>& dfsvisited,
-    //            vector<vector<int>> &adj, int u) {
-
-    //     visited[u] = true;
-    //     dfsvisited[u] = true;
-
-    //     for (int v : adj[u]) {
-
-    //         if (!visited[v]) {
-    //             if (solve(visited, dfsvisited, adj, v)) {
-    //                 return true;
-    //             }
-    //         }
-
-    //         if (dfsvisited[v]) {
-    //             return true;
-    //         }
-    //     }
-
-    //     dfsvisited[u] = false;
-    //     return false;
-    // }
-    bool canFinish(int V, vector<vector<int>>& prerequisites) {
-
-        vector<vector<int>> adj(V);
-          vector<int>indegree(V,0);
-        for (auto& vec : prerequisites) {
-
-            int u = vec[0];
-            int v = vec[1];
-
-            adj[v].push_back(u);
-           
-            indegree[u]++;
-        }
+    bool canFinish(int numCourses, vector<vector<int>>& pre) {
+        // using kahn algo
+ 
+            vector<vector<int>>adj(numCourses);
        
-         queue<int>q;
-         int count=0;
-       for (int i = 0; i < V; i++) { // Iterate through indices from 0 to V-1
-            if (indegree[i] == 0) {
-                q.push(i); // Push the course index 'i'
-                count++;
+            vector<int>indegree(numCourses,0);
+            for(auto i:pre){
+                  int u = i[0];
+                  int v = i[1];
+                 adj[v].push_back(u);
+                   indegree[u]++;
             }
-        }
-
-
-         while (!q.empty()){
-              
-               int front =q.front();
-                 q.pop();
-               for(int& v:adj[front]){
-                   
-                    indegree[v]--;
-                    if (indegree[v]==0) {
-                         count++;
+            queue<int>q;
+            for(int i=0;i<numCourses;i++){
+                   if (indegree[i]==0){
+                       q.push(i);
+                   }
+            }
+             
+            int c =0;
+            while (!q.empty()){
+                int u= q.front();
+                q.pop();
+                  c++;
+                  for(auto v:adj[u]){
+                     indegree[v]--;
+                     if (indegree[v]==0){
                          q.push(v);
-                    }
+                     }
+                  }
                    
-               }
-         }
+            }
 
-           return count==V;
-      
-        // dfs
-        // vector<int> visited(V, 0);
-        // vector<int> dfsvisited(V, 0);
-
-        // for (int i = 0; i < V; i++) {
-        //     if (!visited[i]) {
-        //         if (solve(visited, dfsvisited, adj, i)){
-        //                return false;
-        //         }
-                 
-       
-                
-        //     }
-        // }
-
-        // return true;
+            return c==numCourses;
     }
 };
