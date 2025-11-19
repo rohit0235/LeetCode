@@ -1,54 +1,40 @@
 class Solution {
 public:
-    vector<int> solve(unordered_map<int, vector<int>>& adj,
-                      vector<int>& indegree, int numCourses) {
-
-        vector<int> result;
-        queue<int> q;
-        int count = 0;
-        for (int i = 0; i < numCourses; i++) {
-            if (indegree[i] == 0) {
-
-                q.push(i);
+    vector<int> findOrder(int numCourses, vector<vector<int>>& pre) {
+         
+            vector<vector<int>>adj(numCourses);
+            vector<int>ans;
+            vector<int>indegree(numCourses,0);
+            for(auto i:pre){
+                  int u = i[0];
+                  int v = i[1];
+                 adj[v].push_back(u);
+                   indegree[u]++;
             }
-        }
-
-        while (!q.empty()) {
-
-            int u = q.front();
-            q.pop();
-            result.push_back(u);  // Add the current course to the topological order
-            count++; // Increment the count of processed courses
-            for (auto v : adj[u]) {
-
-                // q.push(v);
-                indegree[v]--;
-                if (indegree[v] == 0) {
-                    // result.push_back(v);
-                    // count++;
-                     q.push(v);
-                }
+            queue<int>q;
+            for(int i=0;i<numCourses;i++){
+                   if (indegree[i]==0){
+                       q.push(i);
+                            // ans.push_back(i);
+                   }
             }
-        }
-
-        if (count == numCourses)
-            return result;
-        else
-            return {};
-    }
-    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
-
-        unordered_map<int, vector<int>> adj;
-        vector<int> indegree(numCourses, 0);
-        for (auto i : prerequisites) {
-
-            int u = i[0];
-            int v = i[1];
-
-            adj[v].push_back(u);
-            indegree[u]++;
-        }
-
-        return solve(adj, indegree, numCourses);
+             
+            int c =0;
+            while (!q.empty()){
+                    int u= q.front();
+                    ans.push_back(u);
+                    q.pop();
+                  c++;
+                  for(auto v:adj[u]){
+                     indegree[v]--;
+                     if (indegree[v]==0){
+                         q.push(v);
+                     }
+                  }
+                   
+            }
+            
+        if ( c==numCourses) return ans;
+        return {}; 
     }
 };
