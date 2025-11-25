@@ -2,12 +2,12 @@ class Solution {
 public:
     int smallestRepunitDivByK(int k) {
            
-           if (k==1) return 1;
-           if (k%2==0) return -1;
-           if (k==11 ) return 2;
-           if (k==3) return 3;
-           if (k==9) return 9;
-           if (k==7) return 6;
+        //    if (k==1) return 1;
+        //    if (k%2==0) return -1;
+        //    if (k==11 ) return 2;
+        //    if (k==3) return 3;
+        //    if (k==9) return 9;
+        //    if (k==7) return 6;
            
             // can we check cycle
             // i think so
