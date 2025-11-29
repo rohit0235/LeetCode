@@ -1,65 +1,41 @@
 class Solution {
 public:
-
-       void dfs(vector<vector<int>>& isConnected,int u,vector<bool>&visited,   vector<vector<int>>adj)
-{  
-
-        visited[u]=true;
-
-       for(auto v:adj[u]){
-             
-                if (!visited[v]){
-                       
-                       dfs(isConnected,v,visited,adj);
-                      
-                }
+    int find(int x , vector<int>&parent){
+            if (parent[x]==x) return x;
+            return parent[x] = find(parent[x],parent);
+    }
+    void unite(int x , int y , vector<int>&parent){
+          int lrep = find(x, parent);
+          int jrep = find(y, parent);
            
-       }
+          parent[lrep] = jrep;
+    }     
 
 
-
-     
-         
-}
-
-    int findCircleNum(vector<vector<int>>& isConnected) {
-             
-              int n =isConnected.size();
-              int m =isConnected[0].size();
-               int ans =0;
-               
-               vector<vector<int>>adj(n,vector<int>(m,0));
-
-               for(auto i=0;i<isConnected.size();i++){
-                        
-                        for(int j=0;j<isConnected[0].size();j++){
-                              
-                              if (isConnected[i][j]==1){
-                                     adj[i].push_back(j);
-                                     adj[j].push_back(i);
-                                  
-                              }
+ 
+    int findCircleNum(vector<vector<int>>& isc) {
+            int n = isc.size();
+            vector<int>parent(n,0);
+            for(int i=0;i<n;i++){
+                 parent[i]=i;
+            }
 
 
-                        }
-
-                   
-               }
-               vector<bool>visited(n,0);
-              for(int i=0;i<n;i++){
-                  
-                    if (!visited[i]){
-                            ans++;
-                         dfs(isConnected , i , visited,adj);
-                         
-                    }
-             
-                  
-              }
+            for(int i=0;i<n;i++){
+                  for(int j=i+1;j<n;j++){
+                       if (isc[i][j]==1){
+                           unite(i,j,parent);
+                       }
+                  }
+            }
+           int ans = 0;
+        for (int i = 0; i < n; i++) {
+            if (parent[i] == i) {
+                ans++;
+            }
+        }
 
 
-              return ans ;
-
-              
+            return ans;
     }
 };
