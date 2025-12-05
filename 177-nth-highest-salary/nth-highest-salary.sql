@@ -1,13 +1,15 @@
 CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
-BEGIN
+BEGIN   
+ SET N =N-1;
   RETURN (
-      WITH cte AS (
-          SELECT salary, DENSE_RANK() OVER (ORDER BY salary DESC) AS rnk 
-          FROM employee
-      )
-      SELECT IFNULL(
-          (SELECT DISTINCT salary FROM cte WHERE rnk = N),
-          NULL
-      ) AS getNthHighestSalary
+
+        select distinct salary as getNthHighestSalary
+
+        FROM Employee 
+        ORDER BY salary desc 
+        LIMIT 1 OFFSET N
+    
+
+
   );
 END
