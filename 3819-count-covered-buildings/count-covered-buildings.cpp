@@ -4,7 +4,7 @@ public:
     if (a[1]==b[1]){
          return a[0]>b[0];
     }
-         return a[1]<b[1];
+         return a[1]<=b[1];
  }
     int countCoveredBuildings(int n, vector<vector<int>>& buildings) {
         map<pair<int,int>, int>mp;
