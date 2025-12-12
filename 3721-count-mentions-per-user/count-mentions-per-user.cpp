@@ -76,7 +76,7 @@ int all =0;
         // }  
          mp.clear();
         for(auto i:events){
-              cout<<i[1]<<endl;
+            //   cout<<i[1]<<endl;
               if (i[0]=="MESSAGE"){
                 solve(ans , events, i, numberOfUsers);
               }
