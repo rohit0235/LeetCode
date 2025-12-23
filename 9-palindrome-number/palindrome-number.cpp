@@ -1,21 +1,15 @@
 class Solution {
 public:
     bool isPalindrome(int x) {
-          
-        string num=to_string(x);
-        int n=num.size();
-        for (int i=0;i<num.size()/2;i++){
-            if (num[i]!=num[n-i-1]){
-                     return false;
-            }
+        if (x<0) return false;
+
+        long long num=0;
+        long long num2=x;
+        while (num2){
+              num=num*10+(num2%10);
+              num2/=10;
         }
-        return true;
-        
-
-          
-
-
-
+        // cout<<num<<" "<<x;
+        return num==x;
     }
-
 };
