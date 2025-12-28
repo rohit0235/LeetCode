@@ -19,7 +19,7 @@ public:
             }
             if(r<n) ans += (m - c - 1);
             r++;
-            cout << ans << endl;
+            // cout << ans << endl;
         }
 
         return ans;
