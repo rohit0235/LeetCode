@@ -1,31 +1,47 @@
 class Solution {
 public:
-       bool ispalind(string &s,int i,int j,vector<vector<int>>&dp){
-              
-              if (i>=j) return 1;
-                if (dp[i][j]!=-1) return dp[i][j];
-              if (s[i]==s[j]) return dp[i][j]=ispalind(s,i+1,j-1,dp);
+    
+    int t[1001][1001];
+    vector<int>ans;
+    int maxlength = 0;
+    bool pal(string &s, int i, int j){
+            while (i<=j){
+                 if (s[i]!=s[j]) return false;
+                 i++;
+                 j--;
+            }
 
-              return dp[i][j]==0;
-       }
+            return true;
+    }
+    int solve(string &s, int i, int j){
+           if (i>j) return 0;
+           if (t[i][j]!=-1) return t[i][j];
+           if (pal(s,i,j) && j-i+1>maxlength){
+                  maxlength = max(maxlength, j-i+1);
+                //   ans.empty();
+                vector<int>temp = {i,j};
+                 ans = temp;
+           }
+           int f =0;
+           if (s[i]==s[j]){
+              int f = solve(s, i+1,j-1);
+           }
+           int ss =solve(s,i+1,j);
+           int th=solve(s,i,j-1);
+
+           return t[i][j]=max(f,max(ss, th));
+    }
+    
+    
     string longestPalindrome(string s) {
-              int n=s.size();
-              int sp=0;
-              int maxlen=INT_MIN;
-              vector<vector<int>>dp(n,vector<int>(n,-1));
-             for(int i=0;i<n;i++){
-                   
-                     for(int j=i;j<n;j++){
-                          
-                           if (ispalind(s,i,j,dp)){
-                                 if (j-i+1>maxlen){
-                                       maxlen=j-i+1;
-                                       sp=i;
-                                 }
-                           }
-                     }
-             }
+          memset(t,-1,sizeof(t));
+          int n =s.size();
+          int i =0;
+          int j=n-1;
+          solve(s, i,j);
+         int  l = ans[0];
+         int  r = ans[1];
 
-             return s.substr(sp,maxlen);
+          return s.substr(l,r-l+1);
     }
 };
