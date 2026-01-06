@@ -1,38 +1,48 @@
 class Solution {
 public:
+    vector<int> parent;
+
+    int find(int x) {
+        if (parent[x] == x) return x;
+        return parent[x] = find(parent[x]);
+    }
+
+    void unite(int x, int y) {
+        int rootX = find(x);
+        int rootY = find(y);
+        if (rootX != rootY) {
+            parent[rootX] = rootY;
+        }
+    }
+
     int longestConsecutive(vector<int>& nums) {
+        int n = nums.size();
+        if (n == 0) return 0;
 
-        if (nums.size() == 0)
-            return false;
-        if (nums.size() == 1)
-            return true;
-        unordered_set<int> s;
-        for (int i = 0; i < nums.size(); i++) {
-            s.insert(nums[i]);
-        }
-        int maxi = INT_MIN;
+        parent.resize(n);
+        for (int i = 0; i < n; i++) parent[i] = i;
 
-        for (auto i : s) {
+        unordered_map<int, int> valToIndex;
+        for (int i = 0; i < n; i++) {
+            if (valToIndex.count(nums[i])) continue;
 
-            if (s.find(i - 1) == s.end()) {
-                int len = 1;
-                int x = i;
-                while (s.find(x) != s.end()) {
-                    len=len+1;
-                    x=x+1;
-                }
-                maxi = max(maxi, len);
+            if (valToIndex.count(nums[i] - 1)) {
+                unite(i, valToIndex[nums[i] - 1]);
             }
+            if (valToIndex.count(nums[i] + 1)) {
+                unite(i, valToIndex[nums[i] + 1]);
+            }
+            valToIndex[nums[i]] = i;
         }
 
-        return maxi-1;
+        unordered_map<int, int> counts;
+        int maxi = 0;
+        for (auto const& [val, index] : valToIndex) {
+            int root = find(index);
+            counts[root]++;
+            maxi = max(maxi, counts[root]);
+        }
 
-        //    map<int,int>mp;
-        //     int n=nums.size();
-        //    for (int i=0;i<n;i++) mp[i]++;
-
-        //    for(auto i:mp){
-        //             if ()
-        //    }
+        return maxi;
     }
 };
