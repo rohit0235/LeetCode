@@ -1,26 +1,32 @@
 class Solution {
 public:
-    int memo[10001];
+    int n  ;
+    vector<vector<int>>dp;
+     int solve(vector<int>& coins, int amount, int idx ){
+          
+           if (amount==0) return 0;
+           if (amount<0) return INT_MAX;
 
-    int solve(vector<int>& coins, int amount) {
-        if (amount == 0) return 0;
-        if (amount < 0) return 1e9;
-        if (memo[amount] != -1) return memo[amount];
-
-        int minCoins = 1e9;
-        for (int coin : coins) {
-            int res = solve(coins, amount - coin);
-            if (res != 1e9) {
-                minCoins = min(minCoins, 1 + res);
+           if(idx>=n) return INT_MAX;
+           if(dp[idx][amount]!=-1) return  dp[idx][amount];
+            int f =INT_MAX; 
+            if(amount-coins[idx]>=0){
+                     int check = solve(coins , amount - coins[idx], idx);
+                     if(check!=INT_MAX){
+                         f = 1+ check;
+                     }
             }
-        }
+        
+           int s = solve(coins , amount , idx+1);
+           return  dp[idx][amount]=min(f,s);
 
-        return memo[amount] = minCoins;
-    }
-
+           
+     }
     int coinChange(vector<int>& coins, int amount) {
-        memset(memo, -1, sizeof(memo));
-        int result = solve(coins, amount);
-        return (result >= 1e9) ? -1 : result;
+           n = coins.size();
+          dp.resize(n+1,vector<int>(amount+1,-1));
+          int check = solve(coins , amount , 0);
+         if (check==INT_MAX) return -1;
+         return check;
     }
 };
