@@ -6,45 +6,54 @@
  *     TreeNode *right;
  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
+ * right(right) {}
  * };
  */
 class Solution {
 public:
     int widthOfBinaryTree(TreeNode* root) {
-             if (root == nullptr) return 0;
 
-        queue<pair<TreeNode*, unsigned long long>> q;
+        if (root == NULL)
+            return 0;
+
+        queue<pair<TreeNode*, int>> q;
         q.push({root, 0});
-        unsigned long long max_width = 0;
-
+        long long maxi = 0;
         while (!q.empty()) {
-            unsigned long long level_size = q.size();
-            unsigned long long left = q.front().second;
-            unsigned long long right = q.back().second;
-            max_width = max(max_width, right - left + 1);
 
-            for (unsigned long long i = 0; i < level_size; ++i) {
-                auto node_pair = q.front();
+            long long n = q.size();
+            long long l = q.front().second;
+            long long r = q.back().second;
+            // cout<<l<<" "<<r<<endl;
+             maxi = max(maxi, r-l+1);
+            for (long long i = 0; i < n; i++) {
+                TreeNode* front = q.front().first;
+                long long val = q.front().second;
+              
                 q.pop();
-                TreeNode* node = node_pair.first;
-                unsigned long long index = node_pair.second;
-
-                if (node->left) {
-                    q.push({node->left, 2 * index + 1});
-                }
-                if (node->right) {
-                    q.push({node->right, 2 * index + 2});
-                }
+                if (front->left)
+                    q.push({front->left, 2 * val + 1});
+                if (front->right)
+                    q.push({front->right, 2 * val+2});
             }
         }
+        return maxi;
 
-        return max_width;
+        // int mini = INT_MAX;
+        // int maxi = -1;
+
+        // while (!q.empty()) {
+        //     TreeNode* front = q.front().first;
+        //     int val = q.front().second;
+        //       q.pop();
+        //       cout<<val<<endl;
+        //     maxi = max(maxi, val);
+        //     mini = min(mini, val);
+        // }
+
+        // if(maxi==mini) return 1;
+
+        // return maxi-mini;
     }
 };
-
-// 0 -1 -3 
-// 0  1  3 
-//  0 -1 1
-//  -1  -3  
-// 
