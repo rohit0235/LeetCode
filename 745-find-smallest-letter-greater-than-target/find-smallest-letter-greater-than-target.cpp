@@ -1,15 +1,17 @@
 class Solution {
 public:
     char nextGreatestLetter(vector<char>& letters, char target) {
-                  
-             char ans=' ';
+        char ans =target;
+        char mini = letters[0];
+        for(char i:letters){
+              if(i>ans){ 
+                if(ans==target) ans =i;
+                 else  ans = min(ans, i);
+                 
+              }
+              mini = min(mini, i);
+        }
 
-             for(char i:letters){
-                 if (i>target && (ans==' ' || i<ans)){
-                      ans=i;
-                 }
-             }  
-             if (ans==' ') return letters[0];   
-                   return ans;           
+        return ans==target ? mini : ans;
     }
 };
