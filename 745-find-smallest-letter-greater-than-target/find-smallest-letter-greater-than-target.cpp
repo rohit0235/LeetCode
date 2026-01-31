@@ -9,7 +9,7 @@ public:
                  else  ans = min(ans, i);
                  
               }
-              mini = min(mini, i);
+            //   mini = min(mini, i);
         }
 
         return ans==target ? mini : ans;
